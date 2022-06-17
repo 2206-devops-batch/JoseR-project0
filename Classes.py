@@ -28,8 +28,7 @@ def write_to_file(path, thing_to_add):
     else:
         with open(my_file, 'a') as file:
             file.write(thing_to_add + "\n")
-def enter_y_to_proceed(question):
-    
+def enter_Y_N_to_proceed(question):
     response = ''
     while(len(response) != 1):
         print(question)
@@ -40,10 +39,16 @@ def enter_y_to_proceed(question):
             return response
         
 def add_credentials():
-    while True:
-        name_for_password = input("Please enter name of new credentials(Id): ")
-        username = input("Enter Username: ")
-        password = input("Enter Password: ")
-        new_credentials = (password_manager(name_for_password, username, password))
-        break
+    name_for_password = ' '
+    username = ' '
+    password = ' '
+    while ' ' in name_for_password:
+        name_for_password = input("Please enter name of new credentials(Id) (no spaces): ")
+    while ' ' in username:
+        username = input("Enter Username (no spaces): ")
+    while ' ' in password:
+        password = input("Enter Password (no spaces): ")
+        
+    new_credentials = (password_manager(name_for_password, username, password))
+        
     return new_credentials
