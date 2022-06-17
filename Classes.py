@@ -52,3 +52,17 @@ def add_credentials():
     new_credentials = (password_manager(name_for_password, username, password))
         
     return new_credentials
+def read_credentials_into_a_list(path):
+    credential_list = []
+    my_file = Path(path)
+    with open(my_file ) as file:
+        for line in file:
+            if(line != '\n'):
+                sub = line.split(', ') 
+                sub[len(sub)-1] = sub[len(sub)-1].rstrip()
+                sub = tuple(sub)
+                credential_list.append(sub)
+        return credential_list        
+def print_credential_list(credentials):
+    for x in credentials:
+        print('ID: '+ x[0]+', Username: '+x[1]+', Password: '+x[2])   

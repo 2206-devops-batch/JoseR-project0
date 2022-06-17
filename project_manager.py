@@ -86,7 +86,7 @@ else:
                exit() 
 
 #second part of the program is to display the appropiate user' usernames and passwords
-credentials_list = []
+
 my_file = Path('./'+username + '.txt') 
 file_exists = exists(my_file)
 # if file does not exists create a new file
@@ -110,17 +110,10 @@ if file_exists == False:
             break
 else:
     #read the file
-    my_file = Path(username+'.txt')
-    with open(my_file ) as file:
-        for line in file:
-            if(line != '\n'):
-                sub = line.split(', ') 
-                sub[len(sub)-1] = sub[len(sub)-1].rstrip()
-                sub = tuple(sub)
-                credentials_list.append(sub)
-    for x in credentials_list:
-        print('ID: '+ x[0]+', Username: '+x[1]+', Password: '+x[2])        
-
+    credential_list = read_credentials_into_a_list(username+'.txt')
+    #print list
+    print_credential_list(credential_list)
+    
 choice = ''
 while choice != '4':
     print('Do you want to (choose a number):\n1. Add Credentials\n2. Remove Credentials\n3. Show credentials\n4. Exit')
@@ -133,6 +126,7 @@ while choice != '4':
                 print('ID: '+ x[0]+', Username: '+x[1]+', Password: '+x[2])
             write_to_file('./'+username+'.txt', new_credentials.name+', '+new_credentials.username+', '+new_credentials.password)
         if choice == '2':
+            credentials_list = read_credentials_into_a_list(username+'.txt')
             credentials_to_delete = input("please enter the name(ID) of the credentials to delete: ")
             for x in credentials_list:
                 if credentials_to_delete in x:
@@ -142,6 +136,8 @@ while choice != '4':
                         write_to_file(username+'.txt', ', '.join(str(y)for y in item))   
             
         if choice =='3':
-            for x in credentials_list:
-                print('ID: '+ x[0]+' Username: '+x[1]+'n Password: '+x[2])
+            #read the file
+            credential_list = read_credentials_into_a_list(username+'.txt')
+            #print list
+            print_credential_list(credential_list)
 
