@@ -28,6 +28,7 @@ def write_to_file(path, thing_to_add):
     else:
         with open(my_file, 'a') as file:
             file.write(thing_to_add + "\n")
+            
 def enter_Y_N_to_proceed(question):
     response = ''
     while(len(response) != 1):
@@ -65,4 +66,4 @@ def read_credentials_into_a_list(path):
         return credential_list        
 def print_credential_list(credentials):
     for x in credentials:
-        print('ID: '+ x[0]+', Username: '+x[1]+', Password: '+x[2])   
+        print('ID: '+ x[0]+', Username: '+x[1]+', Password: '+x[2])  
