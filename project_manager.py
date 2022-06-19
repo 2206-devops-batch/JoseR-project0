@@ -1,5 +1,4 @@
 
-from codecs import namereplace_errors
 from Classes import *
 import os
 
