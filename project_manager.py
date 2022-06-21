@@ -116,6 +116,7 @@ if file_exists == False:
             break
 else:
     #read the file
+    ceedential_list = []
     credential_list = read_credentials_into_a_list(username+'.txt')
     #print list
     print_credential_list(credential_list)
