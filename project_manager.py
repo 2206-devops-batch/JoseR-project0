@@ -153,4 +153,3 @@ while choice != '4':
                 print_credential_list(credential_list)
             else:
                 print('No credentials...')
-
