@@ -1,4 +1,6 @@
 
+from importlib.resources import path
+from isort import file
 from Classes import *
 import os
 
@@ -9,12 +11,25 @@ are_credentials_ok = False
 
 username = ''
 password = ''
+
+
+my_file = Path('password_manager_users.txt')
+new_file_exists = exists(my_file)
+
+ask_if_new_user = ''
+
+if new_file_exists == False:
+    print('No users exist please add a user')
+else:
 #first ask the user for for login information or to sign up
-ask_if_new_user = enter_Y_N_to_proceed('New User? Y/N: ')
+    ask_if_new_user = enter_Y_N_to_proceed('New User? Y/N: ')
 #bool to check if the credentials are ok to pass    
 # if the iser is new. add credentials making sure the username has at least 5 characters and 
 # the password at least 8 and contain a number
-if ask_if_new_user == 'Y':
+
+    
+
+if ask_if_new_user == 'Y' or new_file_exists ==False:
     while are_credentials_ok == False:
     #ask to enter a username and password and save it onto users file
         while len(username) <  5:
@@ -34,7 +49,7 @@ if ask_if_new_user == 'Y':
                 if ' ' in password:
                     lenght = 0            #Ask if the user is satisfied with the credentials entered. otherwise repeat process
         satisfied = ''   
-        print('Your credentials are\nusername: ' + username + '\n' +'password: '+ password +'\n')
+        print('Your credentials are\nusername: ' + username + '\n' +'password: '+ password )
                
         while True :
             print()
@@ -53,15 +68,8 @@ else:
     #read the file to get the list of users and put it into a list of tuples
     #file exists no need to check
     my_file = Path('password_manager_users.txt')
-    credentials_list = []
-    with open(my_file ) as file:
-        for line in file:
-            if(line != '\n'):
-                sub = line.split(' ')
-                sub[len(sub)-1] = sub[len(sub)-1].rstrip()
-                sub = tuple(sub)
-                credentials_list.append(sub)
-      
+    credentials_list = read_credentials_into_a_list(my_file)
+     
 
     user_and_pass_match = False
     while user_and_pass_match == False:
@@ -136,7 +144,13 @@ while choice != '4':
             
         if choice =='3':
             #read the file
-            credential_list = read_credentials_into_a_list(username+'.txt')
+            
+            file = Path(username+'.txt')
+            file_exists = exists(file)
+            if file_exists == True:
+                credential_list = read_credentials_into_a_list(username+'.txt')
             #print list
-            print_credential_list(credential_list)
+                print_credential_list(credential_list)
+            else:
+                print('No credentials...')
 
