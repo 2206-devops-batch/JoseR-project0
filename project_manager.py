@@ -76,15 +76,16 @@ else:
         print('Enter Your username and password')
         username = input( 'Username (no spaces): ')
         username = username.upper()
-        print('Enter your password (case sensitive no spaces): ')
-        password = input()
+        password = input('Enter your password (case sensitive no spaces): ')
+
         
         #check if the username and password matches
-        for list in credentials_list:
-            if(username == list[0] and password == list[1]):
-                    user_and_pass_match = True
-                    print('here are your passwords\n')
-                    break
+        for x in credentials_list:
+            x = str(x[0]).split()
+            if(username == x[0] and password == x[1]):
+                user_and_pass_match = True
+                print('here are your passwords\n')
+                break
         if user_and_pass_match == False:    
             print('wrong username or password.\n')
             try_again = enter_Y_N_to_proceed('Try Again? Y/N: ')
@@ -129,18 +130,24 @@ while choice != '4':
         if choice == '1':
             new_credentials = add_credentials()
             
-            for x in credentials_list:
+            for x in new_credentials:
                 print('ID: '+ x[0]+', Username: '+x[1]+', Password: '+x[2])
             write_to_file('./'+username+'.txt', new_credentials.name+', '+new_credentials.username+', '+new_credentials.password)
+            
         if choice == '2':
-            credentials_list = read_credentials_into_a_list(username+'.txt')
-            credentials_to_delete = input("please enter the name(ID) of the credentials to delete: ")
-            for x in credentials_list:
-                if credentials_to_delete in x:
-                    credentials_list.remove(x)
-                    os.remove(username+'.txt')
-                    for item in credentials_list:
-                        write_to_file(username+'.txt', ', '.join(str(y)for y in item))   
+            file = Path(username+'.txt')
+            file_exists = exists(file)
+            if file_exists == True:
+                credentials_list = read_credentials_into_a_list(username+'.txt')
+                credentials_to_delete = input("please enter the name(ID) of the credentials to delete: ")
+                for x in credentials_list:
+                    if credentials_to_delete in x:
+                        credentials_list.remove(x)
+                        os.remove(username+'.txt')
+                        for item in credentials_list:
+                            write_to_file(username+'.txt', ', '.join(str(y)for y in item))   
+            else:
+                print('No credentials...')
             
         if choice =='3':
             #read the file
