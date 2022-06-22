@@ -1,5 +1,4 @@
 
-
 from Classes import *
 import os
 
@@ -128,12 +127,9 @@ while choice != '4':
     choice = input()
     if contains_a_digit(choice):
         if choice == '1':
-            new_credentials = add_credentials()
-            
-            for x in new_credentials:
-                print('ID: '+ x[0]+', Username: '+x[1]+', Password: '+x[2])
+            new_credentials = add_credentials()            
             write_to_file('./'+username+'.txt', new_credentials.name+', '+new_credentials.username+', '+new_credentials.password)
-            
+            print("credentials added!!")
         if choice == '2':
             file = Path(username+'.txt')
             file_exists = exists(file)
@@ -146,6 +142,7 @@ while choice != '4':
                         os.remove(username+'.txt')
                         for item in credentials_list:
                             write_to_file(username+'.txt', ', '.join(str(y)for y in item))   
+                print('Credentials Removed!!')
             else:
                 print('No credentials...')
             

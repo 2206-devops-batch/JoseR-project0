@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  tasks:
+  - name: "install programs on virtual machine"
+    apt:
+      pkg:
+      - python3-pip
+      state: latest
+
+  - name: "pull repos to add project 0 repository"
+    git:
+      repo: "https://github.com/2206-devops-batch/JoseR-project0" 
+      dest: /home/repos/project0
+      clone: yes
+      update: yes
+      version: main
+

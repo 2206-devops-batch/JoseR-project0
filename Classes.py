@@ -53,6 +53,7 @@ def add_credentials():
     new_credentials = (password_manager(name_for_password, username, password))
         
     return new_credentials
+
 def read_credentials_into_a_list(path):
     credential_list = []
     my_file = Path(path)
