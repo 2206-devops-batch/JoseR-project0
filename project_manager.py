@@ -60,7 +60,7 @@ if ask_if_new_user == 'Y' or new_file_exists ==False:
                 password = ''
                 break
     
-    write_to_file('./password_manager_users.txt', username.upper() +' ' + password )
+    write_to_file('password_manager_users.txt', username.upper() +' ' + password )
 else:
     #else ask the user yo input their credentials to acces their passwords
     #read the file to get the list of users and put it into a list of tuples
