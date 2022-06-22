@@ -1,2 +1,0 @@
-mail, hotmail, password1
-gmail, gmail, password1
